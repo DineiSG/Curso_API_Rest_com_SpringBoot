@@ -33,11 +33,6 @@ public class TesteService {
 
         if(optional.isPresent()){
             Teste reg=optional.get();
-
-            teste.setId(teste.getId());
-            teste.setNome(teste.getNome());
-            teste.setEmail(teste.getEmail());
-
             rep.save(teste);
 
             return teste;
@@ -46,9 +41,13 @@ public class TesteService {
         }
     }
     /*Excluindo arquivos da tabela*/
-    public void delete(Integer id){
-        Optional<Teste>teste=getTesteById(id);
+    public boolean delete(Integer id){
+        if (getTesteById(id).isPresent()){
             rep.deleteById(id);
+            return true;
+        }
+        return false;
+
     }
 }
 
